@@ -63,6 +63,24 @@ class Autoencoder(nn.Module):
         print("Final Loss", loss[-1])
         plt.plot(loss, 'r-')
         plt.show()
+		
+		
+
+
+torch.manual_seed(0)
+data, labels = make_blobs(n_samples=1000, centers=5, n_features=50, random_state=0)
+
+sc = MinMaxScaler()
+data = sc.fit_transform(data)
+
+
+data_bin=(data>.5)*1
+data_bin=torch.from_numpy(data_bin)
+
+ae=Autoencoder()
+ae.fit(data_bin.float())
+
+
             
             
             
